@@ -1,6 +1,8 @@
+"use client";
+
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Usuario } from './types'; // Importa la interfaz de usuario
+import { Usuario } from './types';
 
 const Usuarios = () => {
   const [usuarios, setUsuarios] = useState<Usuario[]>([]);
@@ -12,16 +14,33 @@ const Usuarios = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Usuarios</h1>
-      <ul>
-        {usuarios.map(usuario => (
-          <li key={usuario.id}>
-            {usuario.nombre} - {usuario.correo} <Link href={`/usuarios/${usuario.id}`}>Editar</Link>
-          </li>
-        ))}
-      </ul>
-      <Link href="/usuarios/crear">Crear Nuevo Usuario</Link>
+    <div className="usuarios-container container">
+      <h1 className="title">Lista de Usuarios</h1>
+      <table className="usuarios-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {usuarios.map(usuario => (
+            <tr key={usuario.id}>
+              <td>{usuario.nombre}</td>
+              <td>{usuario.correo}</td>
+              <td>
+                <Link href={`/usuarios/${usuario.id}`}>
+                  <button className="edit-btn">Editar</button>
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <Link href="/usuarios/crear">
+        <button className="create-btn">Crear Nuevo Usuario</button>
+      </Link>
     </div>
   );
 };

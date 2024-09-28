@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const CrearUsuario = () => {
   const [nombre, setNombre] = useState<string>('');
@@ -20,13 +22,44 @@ const CrearUsuario = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Crear Usuario</h1>
-      <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre" required />
-      <input type="email" value={correo} onChange={e => setCorreo(e.target.value)} placeholder="Correo" required />
-      <input type="password" value={contrasena} onChange={e => setContrasena(e.target.value)} placeholder="Contraseña" required />
-      <button type="submit">Crear</button>
-    </form>
+    <div className="crear-usuario-container">
+      <h1 className="title">Crear Usuario</h1>
+      <form onSubmit={handleSubmit} className="crear-usuario-form">
+        <div className="form-group">
+          <label htmlFor="nombre">Nombre</label>
+          <input
+            type="text"
+            id="nombre"
+            value={nombre}
+            onChange={e => setNombre(e.target.value)}
+            placeholder="Nombre"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="correo">Correo</label>
+          <input
+            type="email"
+            id="correo"
+            value={correo}
+            onChange={e => setCorreo(e.target.value)}
+            placeholder="Correo"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="contrasena">Contraseña</label>
+          <input
+            type="password"
+            id="contrasena"
+            value={contrasena}
+            onChange={e => setContrasena(e.target.value)}
+            placeholder="Contraseña"
+          />
+        </div>
+        <button type="submit" className="submit-btn">Crear</button>
+      </form>
+    </div>
   );
 };
 

@@ -1,13 +1,16 @@
+"use client";
+
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { Usuario } from '../types'; // Importa la interfaz de usuario
+import { useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
+import { Usuario } from '../types';
 
 const EditarUsuario = () => {
   const [nombre, setNombre] = useState<string>('');
   const [correo, setCorreo] = useState<string>('');
   const [contrasena, setContrasena] = useState<string>('');
   const router = useRouter();
-  const { id } = router.query;
+  const { id } = useParams();
 
   useEffect(() => {
     if (id) {
@@ -33,13 +36,44 @@ const EditarUsuario = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Editar Usuario</h1>
-      <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre" required />
-      <input type="email" value={correo} onChange={e => setCorreo(e.target.value)} placeholder="Correo" required />
-      <input type="password" value={contrasena} onChange={e => setContrasena(e.target.value)} placeholder="Contraseña" />
-      <button type="submit">Guardar</button>
-    </form>
+    <div className="edit-user-container">
+      <h1 className="title">Editar Usuario</h1>
+      <form onSubmit={handleSubmit} className="edit-user-form">
+        <div className="form-group">
+          <label htmlFor="nombre">Nombre</label>
+          <input
+            type="text"
+            id="nombre"
+            value={nombre}
+            onChange={e => setNombre(e.target.value)}
+            placeholder="Nombre"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="correo">Correo</label>
+          <input
+            type="email"
+            id="correo"
+            value={correo}
+            onChange={e => setCorreo(e.target.value)}
+            placeholder="Correo"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="contrasena">Contraseña</label>
+          <input
+            type="password"
+            id="contrasena"
+            value={contrasena}
+            onChange={e => setContrasena(e.target.value)}
+            placeholder="Contraseña"
+          />
+        </div>
+        <button type="submit" className="submit-btn">Guardar</button>
+      </form>
+    </div>
   );
 };
 
