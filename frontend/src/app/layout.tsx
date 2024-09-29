@@ -5,6 +5,7 @@ import '../styles/editUser.scss';
 import '../styles/usuarios.scss';
 import '../styles/crearUsuario.scss';
 import '../styles/home.scss';
+import '../styles/buttons.scss';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
